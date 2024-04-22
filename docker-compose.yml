@@ -2,12 +2,11 @@ version: '3.8'
 
 services:
   backend:
-    image: warehoue-devops
+    image: warehouse-devops
 
     build:
       dockerfile: ./Dockerfile
       context: .
-    restart: always
     networks:
       - warehouse-networks
     ports:
