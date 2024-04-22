@@ -4,7 +4,7 @@ services:
     expose:
       - 6500
     ports:
-      - 6500:6500
+      - 6500:8080
     build:
       context: .
     container_name: warehouse
@@ -27,8 +27,12 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./dbfiles:/var/llib/postgresql/data
+      - dbfiles:/var/llib/postgresql/data
     environment:
       POSTGRES_USER: hackerearth
       POSTGRES_PASSWORD: devops123
       POSTGRES_DB: warehouse
+
+  volumes:
+    dbfiles:
+  
