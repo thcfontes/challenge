@@ -2,9 +2,9 @@ services:
   backend:
     image: 'docker-spring-boot-postgres:latest'
     expose:
-      - 8080
+      - "8080"
     ports:
-      - 8080:8080
+      - "8080:8080"
     build:
       context: .
     container_name: warehouse
@@ -28,4 +28,4 @@ services:
     volumes:
       - ./dbfiles:/var/llib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
