@@ -2,29 +2,29 @@ services:
   backend:
     image: 'docker-spring-boot-postgres:latest'
     expose:
-      - "8080"
+      - 8080
     ports:
-      - "8080:8080"
+      - 8080:8080
     build:
       context: .
     container_name: warehouse
     depends_on:
       - database
     environment:
-      - SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
+      - SPRING_DATASOURCE_URL: jdbc:db://database:5432/warehouse
       - SPRING_DATASOURCE_USERNAME: hackerearth
       - SPRING_DATASOURCE_PASSWORD: devops123
-      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect 
       - SPRING_JPA_HIBERNATE_DDL_AUTO: create
-      - SPRING_JPA_HIBERNATE_SHOW_SQL: true"
+      - SPRING_JPA_HIBERNATE_SHOW_SQL: true
+      
   database:
     image: 'postgres:13.1-alpine'
     container_name: database
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./dbfiles:/var/llib/postgresql/data
     environment:
       - POSTGRES_USER: hackerearth
       - POSTGRES_PASSWORD: devops123
       - POSTGRES_DB: warehouse
-    volumes:
-      - ./dbfiles:/var/llib/postgresql/data
-    ports:
-      - "5432:5432"
