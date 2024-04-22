@@ -16,15 +16,14 @@ services:
       - SPRING_DATASOURCE_PASSWORD: devops123
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect 
       - SPRING_JPA_HIBERNATE_DDL_AUTO: create
-      - SPRING_JPA_HIBERNATE_SHOW_SQL: true
-
+      - SPRING_JPA_HIBERNATE_SHOW_SQL: true"
   database:
-    image: 'postgres:latest'
+    image: 'postgres:13.1-alpine'
     container_name: database
     environment:
       - POSTGRES_USER: hackerearth
       - POSTGRES_PASSWORD: devops123
-      - POSTGRES_DB: backend
+      - POSTGRES_DB: warehouse
     volumes:
       - ./dbfiles:/var/llib/postgresql/data
     ports:
