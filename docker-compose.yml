@@ -10,7 +10,7 @@ services:
     networks:
       - warehouse-networks
     ports:
-      - "6500:8080"
+      - "6500:6500"
     container_name: warehouse
     depends_on:
       - database
