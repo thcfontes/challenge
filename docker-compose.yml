@@ -2,6 +2,8 @@ services:
   backend:
     build: .
     restart: always
+    networks:
+      - warehouse-networks
     ports:
       - "6500:8080"
     container_name: warehouse
@@ -20,9 +22,15 @@ services:
     image: 'postgres:latest'
     restart: always
     container_name: database
+    networks:
+      - warehouse-networks
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: hackerearth
       POSTGRES_PASSWORD: devops123
       POSTGRES_DB: warehouse
+  
+  networks:
+    warehouse-networks:
+      driver: bridge
