@@ -42,9 +42,7 @@ services:
       PGDATA: /data/prostgres
     volumes:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./postgres.conf:/etc/postgresql/postgresql.conf
       - ./dbfiles/:/var/lib/postgresql/data/
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     healthcheck:
       test: ["CMD", "pg_isready", "-h", "db", "-p", "5432", "-d", "warehouse", "-U", "hackerearth"]
       interval: 10s
