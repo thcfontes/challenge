@@ -41,10 +41,10 @@ services:
       POSTGRES_USER: hackerearth
       POSTGRES_PASSWORD: devops123
       PGUSER: hackerearth
-      PGDATA: /data/prostgres
+      PGDATA: /data/postgres
     volumes:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./dbfiles/:/var/lib/postgresql/data/
+      - ./dbfiles/:/data/postgres
     healthcheck:
       test: ["CMD", "pg_isready", "-h", "database", "-p", "5432", "-d", "warehouse", "-U", "hackerearth"]
       interval: 10s
