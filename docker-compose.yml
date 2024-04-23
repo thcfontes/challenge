@@ -4,11 +4,7 @@ services:
   backend:
     image: warehouse-devops
     hostname: warehouse
-    networks:
-      vpcbr:
-        ipv4_address: 10.5.0.6
-    links:
-      - database
+    restart": on-failure
     build:
       dockerfile: ./Dockerfile
       context: .
@@ -33,11 +29,6 @@ services:
     expose:
       - 5432
     container_name: database
-    networks:
-      vpcbr:
-        ipv4_address: 10.5.0.5
-        aliases:
-          - database
     ports:
       - "5432:5432"
     environment:
@@ -55,11 +46,3 @@ services:
  
 volumes:
   dbfiles:
-
-networks:
-  vpcbr:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: 10.5.0.0/16
-         gateway: 10.5.0.1
