@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     image: warehouse-devops
-
+    restart: always
     build:
       dockerfile: ./Dockerfile
       context: .
@@ -38,7 +38,6 @@ services:
     environment:
       POSTGRES_USER: hackerearth
       POSTGRES_PASSWORD: devops123
-      POSTGRES_DB: warehouse
       PGDATA: /data/prostgres
     volumes:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
