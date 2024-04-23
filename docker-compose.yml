@@ -3,10 +3,11 @@ version: '3.8'
 services:
   backend:
     image: warehouse-devops
-    restart: always
+    restart: on-failure
     build:
       dockerfile: ./Dockerfile
       context: .
+    env_file: ./.env
     networks:
       - warehouse-networks
     ports:
@@ -17,6 +18,7 @@ services:
     links:
       - database:database
     environment:
+      SPRING_APPLICATION_JSON
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
       SPRING_DATASOURCE_USERNAME: hackerearth
       SPRING_DATASOURCE_PASSWORD: devops123
@@ -27,7 +29,7 @@ services:
       
   database:
     image: postgres
-    restart: always
+    restart: on-failure
     expose:
       - 5432
     container_name: database
@@ -44,7 +46,7 @@ services:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./dbfiles/:/var/lib/postgresql/data/
     healthcheck:
-      test: ["CMD", "pg_isready", "-h", "db", "-p", "5432", "-d", "warehouse", "-U", "hackerearth"]
+      test: ["CMD", "pg_isready", "-h", "database", "-p", "5432", "-d", "warehouse", "-U", "hackerearth"]
       interval: 10s
  
 networks:
