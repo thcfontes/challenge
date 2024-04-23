@@ -1,8 +1,6 @@
-FROM openjdk:11-jdk
+FROM maven:3.8.5-openjdk-17
 
-WORKDIR /app
-ARG JAR_FILE=*.jar
 EXPOSE 6500
-COPY target/${JAR_FILE} /app/app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY . .
+RUN mvn clean install -DskipTests
+CMD mvn spring-boot:run
