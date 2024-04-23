@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS warehouse;
+CREATE USER hackerearth WITH SUPERUSER PASSWORD 'devops123';
+CREATE DATABASE database_name OWNER hackerearth;
